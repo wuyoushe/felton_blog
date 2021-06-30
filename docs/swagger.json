@@ -1,0 +1,151 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "基于iris的api服务，默认端口：8000",
+    "title": "HyperGo",
+    "contact": {},
+    "license": {
+      "name": "Apache 2.0"
+    },
+    "version": "1.0.0"
+  },
+  "host": "127.0.0.1:8000",
+  "basePath": "/api",
+  "paths": {
+    "/hello": {
+      "get": {
+        "description": "Hello",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "Hello"
+        ],
+        "parameters": [
+          {
+            "type": "integer",
+            "description": "页码",
+            "name": "page",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "description": "页码尺寸",
+            "name": "pagesize",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/model.User"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/model.JSON"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "model.JSON": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer"
+        },
+        "data": {
+          "type": "object"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "model.Policy": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "method": {
+          "type": "string"
+        },
+        "router": {
+          "type": "string"
+        }
+      }
+    },
+    "model.Role": {
+      "type": "object",
+      "properties": {
+        "created_at": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer"
+        },
+        "policys": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/model.Policy"
+          }
+        },
+        "role_name": {
+          "type": "string"
+        }
+      }
+    },
+    "model.User": {
+      "type": "object",
+      "properties": {
+        "avatar": {
+          "type": "string"
+        },
+        "count_login": {
+          "type": "integer"
+        },
+        "created_at": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer"
+        },
+        "is_auth": {
+          "type": "boolean"
+        },
+        "last_login": {
+          "type": "string"
+        },
+        "last_login_ip": {
+          "type": "string"
+        },
+        "nickname": {
+          "type": "string"
+        },
+        "roles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/model.Role"
+          }
+        },
+        "updated_at": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

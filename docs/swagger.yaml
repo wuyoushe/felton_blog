@@ -1,0 +1,99 @@
+basePath: /api
+definitions:
+  model.JSON:
+    properties:
+      code:
+        type: integer
+      data:
+        type: object
+      message:
+        type: string
+    type: object
+  model.Policy:
+    properties:
+      id:
+        type: integer
+      method:
+        type: string
+      router:
+        type: string
+    type: object
+  model.Role:
+    properties:
+      created_at:
+        type: string
+      id:
+        type: integer
+      policys:
+        items:
+          $ref: '#/definitions/model.Policy'
+        type: array
+      role_name:
+        type: string
+    type: object
+  model.User:
+    properties:
+      avatar:
+        type: string
+      count_login:
+        type: integer
+      created_at:
+        type: string
+      id:
+        type: integer
+      is_auth:
+        type: boolean
+      last_login:
+        type: string
+      last_login_ip:
+        type: string
+      nickname:
+        type: string
+      roles:
+        items:
+          $ref: '#/definitions/model.Role'
+        type: array
+      updated_at:
+        type: string
+      username:
+        type: string
+    type: object
+host: 127.0.0.1:8000
+info:
+  contact: {}
+  description: 基于iris的api服务，默认端口：8000
+  license:
+    name: Apache 2.0
+  title: GiNana
+  version: 1.0.0
+paths:
+  /hello:
+    get:
+      consumes:
+        - application/json
+      description: Hello
+      parameters:
+        - description: 页码
+          in: query
+          name: page
+          required: true
+          type: integer
+        - description: 页码尺寸
+          in: query
+          name: pagesize
+          required: true
+          type: integer
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.User'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/model.JSON'
+      tags:
+        - Hello
+swagger: "2.0"
